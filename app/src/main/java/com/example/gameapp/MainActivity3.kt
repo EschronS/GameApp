@@ -67,12 +67,14 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         supportActionBar?.hide()
         setContentView(R.layout.activity_main3)
+        // this function called on the onCreate for button click start
         changeQuestions()
         QiSDK.register(this, this)
     }
 
     private fun changeQuestions(){
         val handler = Handler()
+        // This function runs the "questions()" function every given milli seconds
         handler.postDelayed(object : Runnable {
             override fun run() {
                 questions()
@@ -81,7 +83,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
                 scoreView.text = score.toString()
                 qNum++
                 quesIndex++
-
+                // after 10 questions it returns to the freeze position
                 if (qNum > 10){
                     qNum = 1
                     score = 0
