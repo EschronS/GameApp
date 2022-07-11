@@ -53,12 +53,12 @@ class MainActivity2 : AppCompatActivity(), RobotLifecycleCallbacks {
         val sayInfo = SayBuilder.with(qiContext)
 
             .withText("The game is quite simple. In German we have two basic words \"machen\" and \"tun\" which are " +
-                    "used to indicate the performance of an action. In English the words we use are \"make\" and \"do\"." +
+                    "used to indicate the performing of an action. In English the words we use are \"make\" and \"do\"." +
                     "Depending on what we want to say, we use either \"make\" or \"do\". I have some sentences stored in my memory banks." +
                     "Some of these are \"make\" sentences and some are \"do\" sentences. When you press the play button" +
                     "I'll display a sentence with blanks and you have to choose the answer either \"make\" or \"do\" within 20 seconds." +
                     "pay attention to the tense. The word could be in the present or past tense, or another tense such as the present perfect." +
-                    "For instance, I \"d0\" my homework every evening, I \"did\" my homework last night, I \"make\" important decisions as part of my job, " +
+                    "For instance, I \"do\" my homework every evening, I \"did\" my homework last night, I \"make\" important decisions as part of my job, " +
                     "I have \"made\" a cake for your birthday. $personName, you can play the game by pressing the play button.")
             .build()
 
