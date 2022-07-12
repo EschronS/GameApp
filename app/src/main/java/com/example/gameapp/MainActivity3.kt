@@ -53,7 +53,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
     )
 
     var quesIndex = 0
-    var counter = 0 // used for the timer visualization
+    var counter = 16 // used for the timer visualization, 17 because the  user has 17s to answer
     var min = 0
 
     var qNum = 1 // change the question numbers
@@ -74,10 +74,12 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
 
     private fun changeQuestions(){
         val handler = Handler()
+        //val qico: QiContext =
         // This function runs the "questions()" function every given milli seconds
         handler.postDelayed(object : Runnable {
             override fun run() {
                 questions()
+                //readQuest(qico)
                 handler.postDelayed(this, 19000)
                 val scoreView:TextView = findViewById(R.id.score)
                 scoreView.text = score.toString()
@@ -318,6 +320,13 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
 
         }
 
+    //unused!!!
+    fun readQuest(qiContext: QiContext?) {       //read out loud, the current question
+        val sayQuest = SayBuilder.with(qiContext)
+            .withText(questions[quesIndex].toString())
+            .build()
+        sayQuest.async().run()
+    }
 
     override fun onRobotFocusGained(qiContext: QiContext?) {
 
@@ -363,14 +372,14 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
         countTime.setTextColor(Color.parseColor("black"))
         object : CountDownTimer(x, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                if (counter == 60){
-                    min++
-                    counter = 0
+                if (counter == 0){
+                    min--
+                    counter = 59
                 }
 
                 val zeit = "$min:$counter"
                 countTime.text = zeit
-                counter++
+                counter--
 
             }
 
@@ -378,7 +387,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
             override fun onFinish() {
                 countTime.text = "Finished"
                 countTime.setTextColor(Color.parseColor("red"))
-                counter = 0
+                counter = 16
                 min = 0
             }
         }.start()
