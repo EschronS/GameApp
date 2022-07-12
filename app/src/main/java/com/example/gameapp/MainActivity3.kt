@@ -52,8 +52,9 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
         "make", "made", "made", "make", "made", "made"
     )
 
+    var timePerQuest = 20   //[s]   time for each question
     var quesIndex = 0
-    var counter = 16 // used for the timer visualization, 17 because the  user has 17s to answer
+    var counter = timePerQuest // used for the timer visualization
     var min = 0
 
     var qNum = 1 // change the question numbers
@@ -80,7 +81,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
             override fun run() {
                 questions()
                 //readQuest(qico)
-                handler.postDelayed(this, 19000)
+                handler.postDelayed(this, 23000)    //(timePerQuest + 3)*1000
                 val scoreView:TextView = findViewById(R.id.score)
                 scoreView.text = score.toString()
                 qNum++
@@ -100,7 +101,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
         // refresh question views
         setContentView(R.layout.activity_main3)
         QiSDK.register(this, this)
-        timer(17000)
+        timer(21000)        //(timePerQuest + 1)*1000
         val quesView: TextView = findViewById(R.id.questions)
         val quesNumView: TextView = findViewById(R.id.quesNumber)
         quesView.text = questions[quesIndex]
@@ -392,7 +393,7 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
             override fun onFinish() {
                 countTime.text = "Finished"
                 countTime.setTextColor(Color.parseColor("red"))
-                counter = 16
+                counter = timePerQuest
                 min = 0
             }
         }.start()
