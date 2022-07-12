@@ -343,6 +343,11 @@ class MainActivity3 : AppCompatActivity(), RobotLifecycleCallbacks {
             .withText("you are doing very well")
             .build()
 
+        val sayQuest = SayBuilder.with(qiContext)       //read out loud the current question
+            .withText(questions[quesIndex-1].toString())    //get the text from current question and
+            .build()                                        //use it for say
+        sayQuest.async().run()
+
         btnExit.setOnClickListener {
             sayFarewell.async().run()
             Handler().postDelayed({
